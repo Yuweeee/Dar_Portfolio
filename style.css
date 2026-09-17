@@ -1059,385 +1059,259 @@ button {
     overflow: hidden;
 }
 
-.design-carousel {
-    width: 100%;
-    overflow: hidden;
-    padding: 30px 0 40px;
-    position: relative;
-}
 
-.design-track {
-    display: flex;
-    align-items: center;
-    gap: clamp(15px, 2vw, 25px);
+/* ========================================
+   DESIGN CONTAINER
+   Uses more screen space but does not
+   stretch the actual photos
+======================================== */
 
-    width: max-content;
-
-    --loop-distance: 0px;
-
-    animation: designScroll 28s linear infinite;
-    animation-play-state: running;
-
-    will-change: transform;
+.design-container {
+    width: min(1400px, 94%);
+    margin: 0 auto;
 }
 
 
 /* ========================================
-   NORMAL DESIGN SIZE
+   DESIGN GALLERY
 ======================================== */
 
-.design-card {
-    flex: 0 0 clamp(180px, 22vw, 300px);
+.design-gallery {
+    width: 100%;
 
-    width: clamp(180px, 22vw, 300px);
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    align-items: start;
+    justify-items: center;
+
+    column-gap: 25px;
+    row-gap: 35px;
+}
+
+
+/* ========================================
+   NORMAL DESIGN ITEMS
+======================================== */
+
+.design-item {
+    width: 100%;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: flex-start;
 
-    background: transparent;
-    border: none;
-    box-shadow: none;
-
-    padding: 0;
-    margin: 0;
+    min-width: 0;
 
     cursor: pointer;
-
-    flex-shrink: 0;
 }
 
 
 /* ========================================
-   DESIGN 5 - LARGER
+   NORMAL DESIGN IMAGES
+   Natural proportions
 ======================================== */
 
-.design-card.large-design {
-    flex: 0 0 clamp(280px, 38vw, 500px);
-
-    width: clamp(280px, 38vw, 500px);
-}
-
-
-/* ========================================
-   ACTUAL IMAGE
-======================================== */
-
-.design-card img {
+.design-item img {
     display: block;
 
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: 500px;
+
+    object-fit: contain;
+
+    border-radius: 14px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* ========================================
+   HOVER
+======================================== */
+
+.design-item:hover img {
+    transform: scale(1.02);
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* ========================================
+   DESIGN 5
+   BOTTOM + LARGER
+======================================== */
+
+.design-five {
+    grid-column: 1 / -1;
+
     width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-top: 10px;
+}
+
+
+/* ========================================
+   DESIGN 5 IMAGE
+======================================== */
+
+.design-five img {
+    display: block;
+
+    width: min(850px, 100%);
+
     height: auto;
 
     max-width: 100%;
 
     object-fit: contain;
 
-    border-radius: 12px;
+    border-radius: 16px;
 
-    transition: transform 0.3s ease;
-}
-
-
-/* Hover only enlarges slightly.
-   It DOES NOT pause the carousel. */
-
-.design-card:hover img {
-    transform: scale(1.03);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 
 /* ========================================
-   LEFT → RIGHT ANIMATION
+   DESIGN 5 HOVER
 ======================================== */
 
-@keyframes designScroll {
-
-    from {
-        transform: translateX(calc(-1 * var(--loop-distance)));
-    }
-
-    to {
-        transform: translateX(0);
-    }
-
-}
-
-
-/* ========================================
-   TABLET
-======================================== */
-
-@media (max-width: 1000px) {
-
-    .design-track {
-        gap: 18px;
-    }
-
-    .design-card {
-        flex-basis: clamp(180px, 30vw, 280px);
-        width: clamp(180px, 30vw, 280px);
-    }
-
-    .design-card.large-design {
-        flex-basis: clamp(260px, 45vw, 420px);
-        width: clamp(260px, 45vw, 420px);
-    }
-
-}
-
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 650px) {
-
-    .design-carousel {
-        padding: 20px 0 30px;
-    }
-
-    .design-track {
-        gap: 15px;
-        animation-duration: 24s;
-    }
-
-    .design-card {
-        flex-basis: 70vw;
-        width: 70vw;
-    }
-
-    .design-card.large-design {
-        flex-basis: 90vw;
-        width: 90vw;
-    }
-
-}
-
-
-/* ========================================
-   SMALL PHONES
-======================================== */
-
-@media (max-width: 400px) {
-
-    .design-card {
-        flex-basis: 78vw;
-        width: 78vw;
-    }
-
-    .design-card.large-design {
-        flex-basis: 92vw;
-        width: 92vw;
-    }
-
-}
-
-
-/* ========================================
-   CAROUSEL BUTTONS
-======================================== */
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: 44px;
-    height: 44px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid var(--border);
-    background: var(--card);
-
-    border-radius: 50%;
-
-    color: var(--primary);
-    font-size: 1.05rem;
-
-    cursor: pointer;
-
-    box-shadow: var(--shadow-sm);
-
-    transition: var(--transition);
-
-    z-index: 5;
-}
-
-.carousel-btn:hover {
-    background: var(--primary);
-    color: var(--white);
-    transform: translateY(-50%) scale(1.05);
-}
-
-.carousel-prev {
-    left: 0;
-}
-
-.carousel-next {
-    right: 0;
-}
-
-
-/* ========================================
-   HIDE DOTS
-======================================== */
-
-.carousel-dots {
-    display: none;
-}
-
-
-/* ========================================
-   TABLET
-======================================== */
-
-@media (max-width: 1000px) {
-
-    .design-card {
-        flex: 0 0 280px;
-        width: 280px;
-    }
-
-}
-
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 750px) {
-
-    .design-carousel-wrapper {
-        padding: 0 43px;
-    }
-
-    .design-card {
-        flex: 0 0 260px;
-        width: 260px;
-    }
-
-}
-
-
-/* ========================================
-   SMALL MOBILE
-======================================== */
-
-@media (max-width: 520px) {
-
-    .design-carousel-wrapper {
-        padding: 0 35px;
-    }
-
-    .design-card {
-        flex: 0 0 230px;
-        width: 230px;
-    }
-
-    .carousel-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 0.9rem;
-    }
-
-}
-
-/* ========================================
-   CAROUSEL BUTTONS
-======================================== */
-
-.carousel-btn {
-    position: absolute;
-
-    top: 45%;
-
-    transform: translateY(-50%);
-
-    width: 44px;
-    height: 44px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid var(--border);
-
-    background: var(--card);
-
-    border-radius: 50%;
-
-    color: var(--primary);
-
-    font-size: 1.05rem;
-
-    cursor: pointer;
-
-    box-shadow: var(--shadow-sm);
-
-    transition: var(--transition);
-
-    z-index: 5;
-}
-
-.carousel-btn:hover {
-    background: var(--primary);
-
-    color: var(--white);
-
-    transform: translateY(-50%) scale(1.06);
+.design-five:hover img {
+    transform: scale(1.01);
 
     box-shadow: var(--shadow-md);
 }
 
-.carousel-prev {
-    left: 0;
+
+/* ========================================
+   LARGE DESKTOP
+======================================== */
+
+@media (min-width: 1200px) {
+
+    .design-gallery {
+        column-gap: 35px;
+    }
+
+    .design-item img {
+        max-height: 520px;
+    }
+
+    .design-five img {
+        width: min(900px, 100%);
+    }
+
 }
 
-.carousel-next {
-    right: 0;
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+
+    .design-container {
+        width: 92%;
+    }
+
+    .design-gallery {
+        grid-template-columns: repeat(2, 1fr);
+
+        column-gap: 25px;
+        row-gap: 30px;
+    }
+
+    .design-item img {
+        max-height: 450px;
+    }
+
+    .design-five img {
+        width: min(750px, 100%);
+    }
+
 }
 
 
-/* Carousel Dots */
+/* ========================================
+   PHONE
+======================================== */
 
-.carousel-dots {
-    display: flex;
+@media (max-width: 600px) {
 
-    justify-content: center;
+    .design-container {
+        width: 92%;
+    }
 
-    gap: 8px;
+    .design-gallery {
+        grid-template-columns: repeat(2, 1fr);
 
-    margin-top: 5px;
+        column-gap: 14px;
+        row-gap: 22px;
+    }
+
+    .design-item img {
+        width: auto;
+        height: auto;
+
+        max-width: 100%;
+        max-height: 350px;
+
+        border-radius: 10px;
+    }
+
+    .design-five {
+        margin-top: 5px;
+    }
+
+    .design-five img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+
+        border-radius: 12px;
+    }
+
 }
 
-.carousel-dot {
-    width: 8px;
-    height: 8px;
 
-    padding: 0;
+/* ========================================
+   SMALL PHONE
+======================================== */
 
-    border: none;
+@media (max-width: 400px) {
 
-    border-radius: 50%;
+    .design-container {
+        width: 94%;
+    }
 
-    background: #D8CDD5;
+    .design-gallery {
+        grid-template-columns: 1fr;
 
-    cursor: pointer;
+        gap: 22px;
+    }
 
-    transition: var(--transition);
-}
+    .design-item img {
+        max-width: 90%;
+        max-height: none;
+    }
 
-.carousel-dot.active {
-    width: 24px;
+    .design-five img {
+        width: 100%;
+    }
 
-    border-radius: 20px;
-
-    background: var(--primary);
 }
 
 
